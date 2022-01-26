@@ -1,7 +1,7 @@
 In this case study, I used the publicly available covid19 dataset to analyze the case count, deaths and vaccinations regionally and globally from January 28, 2020 to November 28, 2021. These are the queries I ran on Google Bigquery
 
 
-Covid19 Deaths Table
+#Covid19 Deaths Table
 
 --Checking the data on CovidDeaths Table
 
@@ -25,7 +25,7 @@ ORDER BY
   date
 
 
-1.	Global Cases, Global Deaths and Global Death Rate
+#Global Cases, Global Deaths and Global Death Rate
 
 --Shows the Total of Global Cases, Global Deaths & Global Death Rate 
 
@@ -46,7 +46,7 @@ ORDER BY
 
 
 
-2.	Covid19 Cases and Deaths by Country 
+#Covid19 Cases and Deaths by Country 
 
 --Shows covid19 cases and deaths by country over time 
 
@@ -62,7 +62,7 @@ ORDER BY
   date
 
 
-3.	Countries with the Highest Infection Rates per Population 
+#Countries with the Highest Infection Rates per Population 
 
 --Highest Infection Rate 
 --Shows top 10 countries with the highest infection rate compared to their population
@@ -82,7 +82,7 @@ LIMIT 10
 
 --Breaking down by Continent
 
-4.	Total Deaths by Continent 
+#Total Deaths by Continent 
 
 --Total Deaths by Continent
 
@@ -99,7 +99,7 @@ ORDER BY
 
 
 
-5.	Covid19 Stats in Africa People Fully Vaccinated by Continent
+#Covid19 Stats in Africa People Fully Vaccinated by Continent
 
 SELECT 
   SUM(new_cases) AS Af_case_count,   
@@ -113,7 +113,7 @@ ORDER BY
 
 
 
-Covid19 Vaccinations Table
+##Covid19 Vaccinations Table
 
 --Checking the data on CovidVaccinations Table
 
@@ -130,7 +130,7 @@ FROM projectportfolio-254.covid19.covid_deaths AS dea
   AND dea.date = vaxx.date
 	
 
-6.	People Fully Vaccinated by Continent 
+#People Fully Vaccinated by Continent 
 --Shows the number of people fully vaccinated by continent
 
 SELECT 
@@ -147,7 +147,7 @@ ORDER BY
 
 
 
-7.	Countries with the Most Fully Vaccinated People 
+#Countries with the Most Fully Vaccinated People 
 --Shows the top 10 countries with fully vaccinated people in Africa
 SELECT *
 FROM
@@ -171,9 +171,9 @@ LIMIT 10
 
 
 
-8.	 Daily Cases, Deaths and Number of People Fully vaccinated in Kenya
+#Daily Cases, Deaths and Number of People Fully vaccinated in Kenya
  
---Daily number of total cases, total deaths, death rate and recoveries in Kenya
+--Daily number of total cases, total deaths, death rate and people fully vaccinated in Kenya
 
 WITH CasesvsDeathsKE AS	
 (
@@ -182,13 +182,13 @@ SELECT
   date, 
   total_cases,  
   total_deaths,
-(total_deaths/total_cases)*100 AS percentage_deaths
+  people_fully_vaccinated,
   FROM projectportfolio-254.covid19.covid_deaths
 WHERE location = 'Kenya'
 ORDER BY 
   date
 )
-SELECT *,  total_cases - total_deaths AS recoveries
+SELECT *,  (total_deaths/total_cases)*100 AS percentage_deaths
 FROM  CasesvsDeathsKE
 
 
@@ -200,7 +200,7 @@ FROM  CasesvsDeathsKE
 
 
 
-9.	Daily Cases, Deaths and Number of People Fully vaccinated per Country
+#Daily Cases, Deaths and Number of People Fully vaccinated per Country
 
 --Creating a temporary table showing daily cases, daily deaths and number of people fully vaccinated every day per country
 
@@ -230,7 +230,7 @@ FROM GlobalCount
 
 
 
-10.	Data Visualizations
+##Data Visualizations on my Tableau Page
  
 Link to the data visualizations:
 https://public.tableau.com/app/profile/maggie.k.
